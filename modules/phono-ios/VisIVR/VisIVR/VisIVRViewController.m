@@ -159,6 +159,37 @@ NSString *_empty = @"<html>\
 - (IBAction)connect{
     [phono setApiKey:@"C17D167F-09C6-4E4C-A3DD-2025D48BA243"];
     [phono connect];
+    
+    NSURL* url = [[NSURL alloc] initWithString: @"http://purple-dev.appspot.com/api/120112/GroupSearch"];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
+    
+    NSString *post = @"session_token=u9uBCefFmR7cFDb:iOS:0.1.0:1351774945.87:gYxK5boL42:e410ca8d351d425a782133c7ae74c658760d47ee&words=&from=&max_results=10";
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding];
+	
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    NSURLResponse *response = [[NSURLResponse alloc]init];
+    NSError *err;
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    
+    NSError *jsonParsingError = nil;
+    NSDictionary *respJSON = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonParsingError];
+    
+    NSArray *groups = [respJSON objectForKey:@"groups"];
+    NSDictionary *group;
+    for(int i=0; i<[groups count];i++)
+    {
+        group = [groups objectAtIndex:i];
+        NSLog(@"Group name: %@", [group objectForKey:@"name"]);
+    }
+    
+    //[response release];
+    
 }
 - (IBAction)disconnect{
     [phono disconnect];
