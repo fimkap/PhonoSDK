@@ -1,4 +1,4 @@
-//
+ //
 //  PhonoXMPP.m
 //  PhonoNative
 //
@@ -82,7 +82,9 @@
     
     //[xmppStream setHostName:@"ec2-50-19-77-101.compute-1.amazonaws.com"];
     //[xmppStream setHostName:@"app-phono-com-1412939140.us-east-1.elb.amazonaws.com"]; http://haproxy1-ext.voxeolabs.net/http-bind
-    [xmppStream setHostName:@"app.phono.com"];
+    [xmppStream setHostName:@"phono-srtp-ext.qa.voxeolabs.net"];
+    // efim - test
+    //[xmppStream setHostName:@"app.phono.com"];
 
     [xmppStream setHostPort:5222];	
     
