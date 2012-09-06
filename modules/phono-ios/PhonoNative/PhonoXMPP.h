@@ -6,6 +6,7 @@
 //  Copyright (c) 2011 Westhhawk Ltd. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 @class UIImage;
 #import "XMPPFramework.h"

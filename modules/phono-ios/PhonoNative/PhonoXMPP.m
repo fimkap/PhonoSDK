@@ -473,6 +473,13 @@ didReceiveTerminate:(NSString *)sid reason:(NSString*)reason{
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq
 {
 	NSLog(@"Got iq %@", [iq XMLString]);
+    if ([iq isResultIQ]) {
+        NSLog(@"isResultIQ true");
+    }
+    else {
+        NSLog(@"isResultIQ false");
+    }
+    NSLog(@"readyID %@", readyID);
     if ([iq isResultIQ] && (readyID != nil) && ([readyID compare:[iq elementID] ] == NSOrderedSame)){
         [self calculateRTT:[iq elementID]];
         if (phono.onReady != nil){
@@ -481,6 +488,10 @@ didReceiveTerminate:(NSString *)sid reason:(NSString*)reason{
             [readyID release];
             readyID = nil;
         }
+    }
+    else {
+        NSLog(@"in background mode");
+        [self incomingConnectionReceivedOnBackground];
     }
 	return NO;
 }
@@ -527,5 +538,55 @@ didReceiveTerminate:(NSString *)sid reason:(NSString*)reason{
         [phono.phone setCurrentCall:nil];
     }
     isXmppConnected = NO;
+}
+
+-(BOOL)isMultitaskingOS
+{
+	//Check to see if device's OS supports multitasking
+	BOOL backgroundSupported = NO;
+	UIDevice *currentDevice = [UIDevice currentDevice];
+	if ([currentDevice respondsToSelector:@selector(isMultitaskingSupported)])
+	{
+		backgroundSupported = currentDevice.multitaskingSupported;
+	}
+	
+	return backgroundSupported;
+}
+
+-(BOOL)isForeground
+{
+	//Check to see if app is currently in foreground
+	if (![self isMultitaskingOS])
+	{
+		return YES;
+	}
+	
+	UIApplicationState state = [UIApplication sharedApplication].applicationState;
+	if(state==UIApplicationStateActive) {
+        return YES;
+    }
+    return NO;
+}
+
+-(void) incomingConnectionReceivedOnBackground
+{
+    if ([self isForeground]) {
+        NSLog(@"In foreground");
+        return;
+    }
+    //App is not in the foreground, so send LocalNotification
+    UIApplication* app = [UIApplication sharedApplication];
+    UILocalNotification* notification = [[UILocalNotification alloc] init];
+    NSArray* oldNots = [app scheduledLocalNotifications];
+    
+    if ([oldNots count]>0)
+    {
+        [app cancelAllLocalNotifications];
+    }
+    
+    notification.alertBody = @"Incoming Call";
+    
+    [app presentLocalNotificationNow:notification];
+    [notification release];
 }
 @end

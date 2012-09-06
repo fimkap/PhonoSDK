@@ -30,6 +30,8 @@
     void (^onReady)();
     void (^onUnready)();
     void (^onError)();
+    BOOL (^isForeground)();
+    void (^incomingConnectionOnBackground)();
     NSString *sessionID;
     NSString *myJID;
 
@@ -46,6 +48,8 @@
 @property(nonatomic, copy) void (^onReady)();
 @property(nonatomic, copy) void (^onUnready)();
 @property(nonatomic, copy) void (^onError)();
+@property(nonatomic, copy) BOOL (^isForeground)();
+@property(nonatomic, copy) void (^incomingConnectionOnBackground)();
 @property(readwrite, copy) NSString *sessionID;
 @property(readwrite, copy) NSString *myJID;
 @property(readonly) PhonoPhone *phone;

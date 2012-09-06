@@ -25,7 +25,7 @@
 
 @implementation PhonoNative
 
-@synthesize apiKey,onReady,onUnready,onError,sessionID,phone, pxmpp, papi, messaging, myJID;
+@synthesize apiKey,onReady,onUnready,onError,sessionID,phone, pxmpp, papi, messaging, myJID, isForeground, incomingConnectionOnBackground;
 
 - (id)init
 {

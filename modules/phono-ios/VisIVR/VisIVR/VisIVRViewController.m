@@ -120,12 +120,28 @@ NSString *_empty = @"<html>\
     phono.onReady = ^{ [self gotjId];};
     phono.onUnready = ^{ [self gotjId];};
     phono.onError = ^{ [self update:@"error"];};
+    
+    //phono.isForeground = ^{ return YES; }; //^{ [self isForeground];};
+    phono.isForeground = ^{
+        if (![self isMultitaskingOS])
+        {
+            return YES;
+        }
+        
+        UIApplicationState state = [UIApplication sharedApplication].applicationState;
+        if(state==UIApplicationStateActive) {
+            return YES;
+        }
+        return NO;
+    };
+    phono.incomingConnectionOnBackground = ^{ [self incomingConnectionReceivedOnBackground];};
 
 
     NSURL *base = [NSURL URLWithString:@"http://s.phono.com/"];
     NSString *empty = [NSString stringWithFormat:_empty,@""];    
     [prompt loadHTMLString:empty baseURL:base];
     [self registerForKeyboardNotifications ];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
 }
 
 - (void)viewDidUnload
@@ -356,5 +372,55 @@ NSString *_empty = @"<html>\
     NSDictionary *respJSON = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonParsingError];
 
     
+}
+
+-(BOOL)isMultitaskingOS
+{
+	//Check to see if device's OS supports multitasking
+	BOOL backgroundSupported = NO;
+	UIDevice *currentDevice = [UIDevice currentDevice];
+	if ([currentDevice respondsToSelector:@selector(isMultitaskingSupported)])
+	{ 
+		backgroundSupported = currentDevice.multitaskingSupported;
+	}
+	
+	return backgroundSupported;
+}
+
+-(BOOL)isForeground
+{
+	//Check to see if app is currently in foreground
+	if (![self isMultitaskingOS])
+	{
+		return YES;
+	}
+	
+	UIApplicationState state = [UIApplication sharedApplication].applicationState;
+	if(state==UIApplicationStateActive) {
+        return YES;
+    }
+    return NO;
+}
+
+-(void) incomingConnectionReceivedOnBackground
+{
+    if ([self isForeground]) {
+        NSLog(@"In foreground");
+        return;
+    }
+    //App is not in the foreground, so send LocalNotification
+    UIApplication* app = [UIApplication sharedApplication];
+    UILocalNotification* notification = [[UILocalNotification alloc] init];
+    NSArray* oldNots = [app scheduledLocalNotifications];
+    
+    if ([oldNots count]>0)
+    {
+        [app cancelAllLocalNotifications];
+    }
+    
+    notification.alertBody = @"Incoming Call";
+    
+    [app presentLocalNotificationNow:notification];
+    [notification release];
 }
 @end
