@@ -11,7 +11,6 @@
 		2223084D1499E05400AEF013 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2223084C1499E05400AEF013 /* UIKit.framework */; };
 		2223084F1499E05400AEF013 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2223084E1499E05400AEF013 /* Foundation.framework */; };
 		222308511499E05400AEF013 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222308501499E05400AEF013 /* CoreGraphics.framework */; };
-		222308571499E05400AEF013 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 222308551499E05400AEF013 /* InfoPlist.strings */; };
 		222308591499E05400AEF013 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 222308581499E05400AEF013 /* main.m */; };
 		2223085D1499E05400AEF013 /* VisIVRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223085C1499E05400AEF013 /* VisIVRAppDelegate.m */; };
 		222308601499E05400AEF013 /* VisIVRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223085F1499E05400AEF013 /* VisIVRViewController.m */; };
@@ -37,7 +36,7 @@
 		22D926AD14AC96A100F9D295 /* Diggztone_Vibe.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 22D926A214AC96A100F9D295 /* Diggztone_Vibe.mp3 */; };
 		22D926AE14AC96A100F9D295 /* ringback-uk.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 22D926A314AC96A100F9D295 /* ringback-uk.mp3 */; };
 		22D926AF14AC96A100F9D295 /* ringback-us.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 22D926A414AC96A100F9D295 /* ringback-us.mp3 */; };
-		22E0E4EC15AC5B6700313698 /* libPhonoNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E0E4EB15AC5B6700313698 /* libPhonoNative.a */; };
+		22E0E4EC15AC5B6700313698 /* libPhonoNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E0E4EB15AC5B6700313698 /* libPhonoNative.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		22F126BF14B75A6D00E2FB89 /* Headers in Resources */ = {isa = PBXBuildFile; fileRef = 22F126BE14B75A6D00E2FB89 /* Headers */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +47,6 @@
 		2223084E1499E05400AEF013 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		222308501499E05400AEF013 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		222308541499E05400AEF013 /* VisIVR-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VisIVR-Info.plist"; sourceTree = "<group>"; };
-		222308561499E05400AEF013 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		222308581499E05400AEF013 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2223085A1499E05400AEF013 /* VisIVR-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VisIVR-Prefix.pch"; sourceTree = "<group>"; };
 		2223085B1499E05400AEF013 /* VisIVRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisIVRAppDelegate.h; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 				22D2E8F814ADC868000C4786 /* www */,
 				22D9269914AC96A100F9D295 /* ringtones */,
 				222308541499E05400AEF013 /* VisIVR-Info.plist */,
-				222308551499E05400AEF013 /* InfoPlist.strings */,
 				222308581499E05400AEF013 /* main.m */,
 				2223085A1499E05400AEF013 /* VisIVR-Prefix.pch */,
 			);
@@ -250,7 +247,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				222308571499E05400AEF013 /* InfoPlist.strings in Resources */,
 				222308631499E05400AEF013 /* VisIVRViewController_iPhone.xib in Resources */,
 				222308661499E05400AEF013 /* VisIVRViewController_iPad.xib in Resources */,
 				22D926A514AC96A100F9D295 /* Diggztone_Agent94.mp3 in Resources */,
@@ -284,14 +280,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		222308551499E05400AEF013 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				222308561499E05400AEF013 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		222308611499E05400AEF013 /* VisIVRViewController_iPhone.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -314,9 +302,10 @@
 		222308671499E05400AEF013 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jacob Ner-David (78G33KHE5L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jacob Ner-David (78G33KHE5L)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -331,12 +320,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lxml2",
 				);
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "50CACB62-5ECF-4805-929D-5AC2257257E9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "50CACB62-5ECF-4805-929D-5AC2257257E9";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -345,9 +335,10 @@
 		222308681499E05400AEF013 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -355,12 +346,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lxml2",
 				);
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -378,22 +370,22 @@
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "VisIVR/VisIVR-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../3rdParty/XMPPFramework/Vendor/libidn\"",
 					"\"$(SRCROOT)/../target\"",
 					"\"$(SRCROOT)/../../phono-phonegap-ios/libphono/build/Release-iphoneos\"",
 					"\"$(SRCROOT)/../../phono-phonegap-ios/target\"",
-					"\"/Users/tim/Library/Developer/Xcode/DerivedData/PhonoNative-azfjbduhvcpnhpgtnwxnjqpdejhw/Build/Products/Debug-iphoneos\"",
-					"\"/Users/tim/Library/Developer/Xcode/DerivedData/PhonoNative-azfjbduhvcpnhpgtnwxnjqpdejhw/Build/Products/Debug-iphonesimulator\"",
-					"\"/Users/tim/Library/Developer/Xcode/DerivedData/PhonoIOSNative-adbqunjftafrxqfuzedyiialvrmp/Build/Products/Debug-iphoneos\"",
+					"\"/Users/fimkap/Library/Developer/Xcode/DerivedData/PhonoIOSNative-blbdkqzruyrbysdfmmsivsrhldlr/Build/Products/Debug-iphoneos\"/**",
+					"\"/Users/fimkap/Library/Developer/Xcode/DerivedData/PhonoIOSNative-blbdkqzruyrbysdfmmsivsrhldlr/Build/Products/Debug-iphonesimulator\"/**",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -408,22 +400,22 @@
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "VisIVR/VisIVR-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../3rdParty/XMPPFramework/Vendor/libidn\"",
 					"\"$(SRCROOT)/../target\"",
 					"\"$(SRCROOT)/../../phono-phonegap-ios/libphono/build/Release-iphoneos\"",
 					"\"$(SRCROOT)/../../phono-phonegap-ios/target\"",
-					"\"/Users/tim/Library/Developer/Xcode/DerivedData/PhonoNative-azfjbduhvcpnhpgtnwxnjqpdejhw/Build/Products/Debug-iphoneos\"",
-					"\"/Users/tim/Library/Developer/Xcode/DerivedData/PhonoNative-azfjbduhvcpnhpgtnwxnjqpdejhw/Build/Products/Debug-iphonesimulator\"",
-					"\"/Users/tim/Library/Developer/Xcode/DerivedData/PhonoIOSNative-adbqunjftafrxqfuzedyiialvrmp/Build/Products/Debug-iphoneos\"",
+					"\"/Users/fimkap/Library/Developer/Xcode/DerivedData/PhonoIOSNative-blbdkqzruyrbysdfmmsivsrhldlr/Build/Products/Debug-iphoneos\"/**",
+					"\"/Users/fimkap/Library/Developer/Xcode/DerivedData/PhonoIOSNative-blbdkqzruyrbysdfmmsivsrhldlr/Build/Products/Debug-iphonesimulator\"/**",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -116,6 +116,7 @@
 		223A1DD81498C2E10019A5E3 /* PhonoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 223A1DD61498C2E10019A5E3 /* PhonoMessage.m */; };
 		229B9A1614A0E1AA00E632FA /* XMPPJingle.h in Headers */ = {isa = PBXBuildFile; fileRef = 229B9A1414A0E1AA00E632FA /* XMPPJingle.h */; };
 		229B9A1714A0E1AA00E632FA /* XMPPJingle.m in Sources */ = {isa = PBXBuildFile; fileRef = 229B9A1514A0E1AA00E632FA /* XMPPJingle.m */; };
+		2FBB39D515F8B2AE0017FE9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBB39D415F8B2AE0017FE9C /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -233,6 +234,7 @@
 		223A1DD61498C2E10019A5E3 /* PhonoMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhonoMessage.m; sourceTree = "<group>"; };
 		229B9A1414A0E1AA00E632FA /* XMPPJingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPJingle.h; path = "XEP-0166/XMPPJingle.h"; sourceTree = "<group>"; };
 		229B9A1514A0E1AA00E632FA /* XMPPJingle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPJingle.m; path = "XEP-0166/XMPPJingle.m"; sourceTree = "<group>"; };
+		2FBB39D415F8B2AE0017FE9C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FBB39D515F8B2AE0017FE9C /* UIKit.framework in Frameworks */,
 				221C4AE315AAE8D500312106 /* libphono.a in Frameworks */,
 				22230BD8149A356000AEF013 /* libidn.a in Frameworks */,
 				223A1D7E149777E80019A5E3 /* Foundation.framework in Frameworks */,
@@ -526,6 +529,7 @@
 		223A1D6F149777E70019A5E3 = {
 			isa = PBXGroup;
 			children = (
+				2FBB39D415F8B2AE0017FE9C /* UIKit.framework */,
 				221C4AE215AAE8D500312106 /* libphono.a */,
 				22230A71149A337100AEF013 /* XMPP */,
 				22230A6B149A311900AEF013 /* PhonoXMPP */,
@@ -822,7 +826,6 @@
 					"\"$(SRCROOT)/../3rdParty/XMPPFramework/Vendor/libidn\"",
 					"\"$(SRCROOT)/../../phono-phonegap-ios/target\"",
 					"\"$(SRCROOT)/../../phono-phonegap-ios/libphono/build/Release-iphoneos\"",
-					"\"/Users/tim/Library/Developer/Xcode/DerivedData/PhonoIOSNative-eudjhdpvcvdpzxauxxfifkmkdqsv/Build/Products/Debug-iphoneos\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -843,7 +846,6 @@
 					"\"$(SRCROOT)/../3rdParty/XMPPFramework/Vendor/libidn\"",
 					"\"$(SRCROOT)/../../phono-phonegap-ios/target\"",
 					"\"$(SRCROOT)/../../phono-phonegap-ios/libphono/build/Release-iphoneos\"",
-					"\"/Users/tim/Library/Developer/Xcode/DerivedData/PhonoIOSNative-eudjhdpvcvdpzxauxxfifkmkdqsv/Build/Products/Debug-iphoneos\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
