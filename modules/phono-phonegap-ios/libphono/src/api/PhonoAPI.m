@@ -91,6 +91,12 @@
     if (srtpKeyR != nil) {
         [ps setMasterKeyR:[[NSString alloc] initWithString:srtpKeyR]];
     }
+    
+    // Make sure we use the right category for voice
+    UInt32 sessionCategory = kAudioSessionCategory_PlayAndRecord;
+	
+    OSStatus result = AudioSessionSetProperty (kAudioSessionProperty_AudioCategory, sizeof (sessionCategory),&sessionCategory);
+	if (result) printf("ERROR AudioSessionSetProperty session Category!\n");
 
     PhonoEndpoint *ep = [endpoints objectForKey:luri];
     if (ep == nil){
@@ -117,6 +123,12 @@
 
     
     NSURL *url = [[NSURL alloc ] initWithString:uri];
+    
+    // Make sure we use the ambient category for a ringtone
+    UInt32 sessionCategory = kAudioSessionCategory_AmbientSound;
+	
+    OSStatus result = AudioSessionSetProperty (kAudioSessionProperty_AudioCategory, sizeof (sessionCategory),&sessionCategory);
+	if (result) printf("ERROR AudioSessionSetProperty session Category!\n");
     
     AVAudioPlayer *av = [[AVAudioPlayer alloc ] initWithContentsOfURL:url error:&error];
     [av setNumberOfLoops:-1];
