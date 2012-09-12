@@ -69,6 +69,9 @@
 // hangup a call
 -(void) hangupCall:(PhonoCall *)acall{
     [[phono pxmpp] hangupCall:acall];
+    if (ringTone != nil){
+        [[phono papi] stop:ringTone];
+    }
     currentCall = nil;
 }
 
