@@ -106,6 +106,18 @@ void audioRootChanged (
 }
 void interruptionListenerCallback (void *inUserData, UInt32  interruptionState) {
 	NSLog(@"interruptionListenerCallback");
+    PhonoAudio *phonoAudio = (PhonoAudio*) inUserData;
+    if (interruptionState == kAudioSessionBeginInterruption) {
+        [phonoAudio stop];
+        NSLog(@"stop audio %@", (phonoAudio->stopped)?@"YES":@"NO");
+    }
+    else if ((interruptionState == kAudioSessionEndInterruption) && (phonoAudio->stopped == YES)) {
+        //OSStatus result =	AudioSessionSetActive (true); 
+        //if (result) 
+        //    NSLog(@"ERROR AudioSessionSetActive!\n");
+        [phonoAudio start];
+        NSLog(@"restart audio %@", (phonoAudio->stopped)?@"YES":@"NO");
+    }
 }
 
 

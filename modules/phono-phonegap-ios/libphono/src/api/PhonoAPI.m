@@ -97,6 +97,11 @@
 	
     OSStatus result = AudioSessionSetProperty (kAudioSessionProperty_AudioCategory, sizeof (sessionCategory),&sessionCategory);
 	if (result) printf("ERROR AudioSessionSetProperty session Category!\n");
+    
+    UInt32 shouldDuck = false;
+	
+    result = AudioSessionSetProperty (kAudioSessionProperty_OtherMixableAudioShouldDuck, sizeof (shouldDuck),&shouldDuck);
+	if (result) printf("ERROR AudioSessionSetProperty other audio should duck!\n");
 
     PhonoEndpoint *ep = [endpoints objectForKey:luri];
     if (ep == nil){
@@ -130,9 +135,21 @@
     OSStatus result = AudioSessionSetProperty (kAudioSessionProperty_AudioCategory, sizeof (sessionCategory),&sessionCategory);
 	if (result) printf("ERROR AudioSessionSetProperty session Category!\n");
     
+    UInt32 shouldDuck = true;
+	
+    result = AudioSessionSetProperty (kAudioSessionProperty_OtherMixableAudioShouldDuck, sizeof (shouldDuck),&shouldDuck);
+	if (result) printf("ERROR AudioSessionSetProperty other audio should duck!\n");
+    if (result)
+        NSLog(@"ERROR duck");
+    else
+        NSLog(@"SUCCESS duck");
+    
     AVAudioPlayer *av = [[AVAudioPlayer alloc ] initWithContentsOfURL:url error:&error];
     [av setNumberOfLoops:-1];
     [av setDelegate:self];
+    NSLog(@"useSpeaker: %c", useSpeakerForCall);
+    [audio setSpeaker:useSpeakerForCall];
+    [av setVolume:1.0];
     if (error){
         ret = [error localizedDescription];
         NSLog(@"Play error on %@ of %@",uri,ret);
@@ -142,6 +159,7 @@
         NSLog(@"adding %@",uri);
 
         if (autoplay) {
+            NSLog(@"volume %f", av.volume);
             [av play];
             NSLog(@"playing %@",uri);
         }
