@@ -16,6 +16,8 @@
 
 @synthesize  appNum , tjid, status, prompt, domain, outMess, codec, speakerSw, scrollView;
 
+NSString* session_token = @"";
+
 NSString *_empty = @"<html>\
 <head>\
 <script src='http://code.jquery.com/jquery-1.4.2.min.js'></script>\
@@ -110,8 +112,22 @@ NSString *_empty = @"<html>\
     phone.onIncommingCall = ^(PhonoCall * incall){
         [self popIncommingCallAlert:incall];
     };
-    phone.ringTone = [[NSBundle mainBundle] pathForResource:@"Diggztone_Marimba" ofType:@"mp3"] ;
+    //phone.ringTone = [[NSBundle mainBundle] pathForResource:@"Diggztone_Marimba" ofType:@"mp3"];
+    phone.ringTone = [[NSBundle mainBundle] pathForResource:@"Diggztone_Vibe" ofType:@"mp3"];
     phone.ringbackTone= [[NSBundle mainBundle] pathForResource:@"ringback-uk" ofType:@"mp3"];
+   
+//    CFURLRef        myURLRef;
+//    myURLRef = CFURLCreateWithFileSystemPath (
+//                                              kCFAllocatorDefault,
+//                                              (CFStringRef)phone.ringTone,
+//                                              kCFURLPOSIXPathStyle,
+//                                              FALSE
+//                                              );
+//    SystemSoundID mySSID;
+//    OSStatus err = AudioServicesCreateSystemSoundID(myURLRef, &mySSID);
+//    if (err)
+//        NSLog(@"AudioServicesCreateSystemSoundID error");
+//    phone.ringtoneSSID = mySSID;
 
     phono = [[PhonoNative alloc] initWithPhone:phone ];
     phono.messaging.onMessage = ^(PhonoMessage *message){
@@ -182,6 +198,7 @@ NSString *_empty = @"<html>\
 }
 
 - (IBAction)connect{
+    session_token = @"u9uBCefFmR7cFDb:iOS:0.1.0:1351774945.87:gYxK5boL42:e410ca8d351d425a782133c7ae74c658760d47ee";
     [phono setApiKey:@"C17D167F-09C6-4E4C-A3DD-2025D48BA243"];
     [phono connect];
     
@@ -219,7 +236,11 @@ NSString *_empty = @"<html>\
     
 }
 - (IBAction)disconnect{
-    [phono disconnect];
+    // TODO: temp for test
+    //[phono disconnect];
+    session_token = @"uFckDPDJbrnQjEy:web:0.1.0:1352457145.51:qdNHXCHXLj:f05f97d77f0e5443589965443cf9b48b0dc9a024";
+    [phono setApiKey:@"C17D167F-09C6-4E4C-A3DD-2025D48BA243"];
+    [phono connect];
 }
 - (IBAction)call{
     NSString *user = [appNum text];
@@ -229,11 +250,18 @@ NSString *_empty = @"<html>\
         call = [[[PhonoCall alloc] initOutbound:user domain:dom] retain]; 
         [self update:@"dialing"];
         [call.headers setObject:[phono sessionID] forKey:@"x-jid"];
+        [call.headers setObject:@"uFckDPDJbrnQjEy" forKey:@"x-pp-dest-user-id"];
+        [call.headers setObject:@"gKBM3g8kUbzuM4Y" forKey:@"x-pp-group-id"];
+        [call.headers setObject:@"u9uBCefFmR7cFDb:iOS:0.1.0:1351774945.87:gYxK5boL42:e410ca8d351d425a782133c7ae74c658760d47ee" forKey:@"x-pp-session-token"];
         call.onAnswer = ^{ [self update:@"answered"];};
         call.onError = ^{ [self update:@"error"];};
         call.onHangup = ^{ [self update:@"hangup"];};
         call.onRing = ^{ [self update:@"ring"];};
         call.from = [NSString stringWithString:[phono sessionID]];
+        // Set speaker for outgoing call ringback
+//        if (speakerSw != nil) {
+//            [phono setUseSpeaker:[speakerSw isOn]];
+//        }
         [phono.phone dial:call];
     } else {
         [self update:@"Not connected"];
@@ -354,7 +382,7 @@ NSString *_empty = @"<html>\
     NSURL* url = [[NSURL alloc] initWithString: @"http://purple-dev.appspot.com/api/120112/tropo_register_sid"];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
     
-    NSString *post = [NSString stringWithFormat:@"session_token=u9uBCefFmR7cFDb:iOS:0.1.0:1351774945.87:gYxK5boL42:e410ca8d351d425a782133c7ae74c658760d47ee&device_id=iphone2&sid=%@",sid];
+    NSString *post = [NSString stringWithFormat:@"session_token=%@&device_id=iphone2&sid=%@", session_token, sid];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding];
 	
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
