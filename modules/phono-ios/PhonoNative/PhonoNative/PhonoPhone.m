@@ -22,7 +22,7 @@
 #import "PhonoAPI.h"
 
 @implementation PhonoPhone
-@synthesize tones,onReady,onIncommingCall,headset,ringTone,ringbackTone,phono, xmppsessionID,currentCall;
+@synthesize tones,onReady,onIncommingCall,headset,ringTone,ringbackTone,phono, xmppsessionID,currentCall,ringtoneSSID;
 
 - (PhonoCall *)dial:(PhonoCall *)dest{
     if ([[phono pxmpp] isConnected]) {
@@ -44,7 +44,26 @@
 }
 - (void) didReceiveIncommingCall:(PhonoCall *)call{
     if (ringTone != nil){
-        [[phono papi] play:ringTone autoplay:YES];
+        //[[phono papi] play:ringTone autoplay:YES];
+        CFURLRef        myURLRef;
+        myURLRef = CFURLCreateWithFileSystemPath (
+                                                  kCFAllocatorDefault,
+                                                  (CFStringRef)ringTone,
+                                                  kCFURLPOSIXPathStyle,
+                                                  FALSE
+                                                  );
+        OSStatus err = AudioServicesCreateSystemSoundID(myURLRef, &ringtoneSSID);
+        if (err)
+            NSLog(@"AudioServicesCreateSystemSoundID error");
+        CFRelease (myURLRef);
+        AudioServicesAddSystemSoundCompletion (
+                                               ringtoneSSID,
+                                               NULL,
+                                               NULL,
+                                               ringtoneCallback,
+                                               NULL
+                                               );
+        AudioServicesPlaySystemSound(ringtoneSSID);
     }
     if (onIncommingCall != nil) {
         onIncommingCall(call);
@@ -62,7 +81,8 @@
     currentCall = incall;
     [[phono pxmpp] acceptInboundCall:incall];
     if (ringTone != nil){
-        [[phono papi] stop:ringTone];
+        //[[phono papi] stop:ringTone];
+        AudioServicesDisposeSystemSoundID(ringtoneSSID);
     }
 }
 
@@ -70,9 +90,15 @@
 -(void) hangupCall:(PhonoCall *)acall{
     [[phono pxmpp] hangupCall:acall];
     if (ringTone != nil){
-        [[phono papi] stop:ringTone];
+        //[[phono papi] stop:ringTone];
+        AudioServicesDisposeSystemSoundID(ringtoneSSID);
     }
     currentCall = nil;
+}
+
+static void ringtoneCallback (SystemSoundID  mySSID,void* inClientData)
+{
+    AudioServicesPlaySystemSound(mySSID);
 }
 
 @end

@@ -15,6 +15,7 @@
  *
  */
 #import <Foundation/Foundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 @class PhonoEvent;
 @class PhonoCall;
 @class PhonoNative;
@@ -28,6 +29,7 @@
     void (^onError)(PhonoEvent *);
     void (^onIncommingCall)(PhonoCall *);
     PhonoCall *currentCall;
+    SystemSoundID ringtoneSSID;
 }
 
 @property(readwrite) BOOL tones;
@@ -38,13 +40,15 @@
 @property(readwrite, copy) NSString *ringTone;
 @property(readwrite, assign) PhonoNative *phono;
 @property(readwrite, assign) PhonoCall *currentCall;
-
 @property(readwrite, copy) NSString *ringbackTone;
+@property(readwrite) SystemSoundID ringtoneSSID;
 - (PhonoCall *)dial:(PhonoCall *)dest;
 - (void) didReceiveIncommingCall:(PhonoCall *)call;
 - (void) acceptCall:(PhonoCall *)call;
  //	 When a call arrives via an incomingCall event, it can be answered by calling this function.
 -(void) hangupCall:(PhonoCall *)call;
+
+static void ringtoneCallback (SystemSoundID  mySSID,void * myURLRef);
 
 /*
 dial(destination, config)	 Used to make an outgoing call. This function takes two arguments: the destination, and a config object with additional parameters.
