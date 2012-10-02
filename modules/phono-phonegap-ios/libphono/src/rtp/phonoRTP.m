@@ -392,7 +392,7 @@ static uint16_t copyBitsI(uint8_t *input, int in_pos,
 	NSLog(@"in rcv thread");
     uint8_t *rcvbuff;
     NSMutableData *rb = [[NSMutableData alloc] initWithLength:1024]; 
-    NSTimeInterval ntv = 0.01;
+    //NSTimeInterval ntv = 0.01;
     while (ipv4Soc > 0){
         [rb setLength:1024];
         rcvbuff = [rb mutableBytes];

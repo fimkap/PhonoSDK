@@ -67,7 +67,7 @@ NSString *_empty = @"<html>\
     call = incall;
     NSString *erom = [PhonoNative unescapeString:[incall from]];
     // Extract caller name
-    NSMutableDictionary *cheaders = [incall headers];
+    //NSMutableDictionary *cheaders = [incall headers];
 //    for (id key in [cheaders allKeys])
 //    {
 //        NSLog(@"key: %@", [key stringValue]);
@@ -397,7 +397,8 @@ NSString *_empty = @"<html>\
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
     
     NSError *jsonParsingError = nil;
-    NSDictionary *respJSON = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonParsingError];
+    [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonParsingError];
+    //NSDictionary *respJSON = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonParsingError];
 
     
 }

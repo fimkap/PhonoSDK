@@ -83,7 +83,7 @@
                     struct sockaddr_in *lad = (struct sockaddr_in *)&(ifr->ifr_ifru.ifru_addr);
                     NSLog(@"got an INET interface %s",inet_ntoa(lad->sin_addr));
                     if (ret == nil) {
-                        ret = [[NSString alloc] initWithCString:inet_ntoa(lad->sin_addr)];
+                        ret = [[NSString alloc] initWithFormat:@"%s", inet_ntoa(lad->sin_addr)];
                         NSLog(@"using %s",inet_ntoa(lad->sin_addr));
 
                     }
@@ -115,7 +115,7 @@
     
     CFDataRef anywhere = CFDataCreate(kCFAllocatorDefault, (uint8_t *)&lad, sizeof(lad));
     
-    CFSocketError err = CFSocketSetAddress (sock ,anywhere);
+    CFSocketSetAddress (sock ,anywhere);
     
     CFDataRef loc =  CFSocketCopyAddress (sock);
     struct sockaddr_in *local = (struct sockaddr_in *) CFDataGetBytePtr(loc);
